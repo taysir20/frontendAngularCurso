@@ -1,0 +1,38 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <form (ngSubmit)="create()">
+      <!--creamos divs con la class de bootstrap form group horizontal
+       para agrupar
+      su label con su etiqueta
+      En nuestro form no habrá atributo action, pues la forma con la que
+      vamos a setear los valores del campo al objeto cliente
+      que tendremos en la clase FormComponent no será enviando estos
+      valores por el action sino que usaremos la directiva ngModel.
+      Algo parecido a lo que haciamos con el model/map de Spring 5 en el formulario  -->
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <div class= "col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
+        <div class= "col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">Email</label>
+        <div class= "col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button role="submit" class="btn-primary">Crear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

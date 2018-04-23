@@ -1,0 +1,39 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Clientes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Clientes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary"
+      type="button" [routerLink]="['/clientes/form']">Crear Cliente</button>
+    </div>
+<!--Dentro vamos a crear una tabla que es donde vamos a recorrer el array de objetos
+  cliente.
+-->
+  <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Fecha</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--Vamos a añadir al tr el *ngFor dado que se va a crear una fila
+        por cada cliente-->
+        <tr *ngFor="let auxCliente of clientes">
+          <td>{{auxCliente.id}}</td>
+          <td>{{auxCliente.nombre}}</td>
+          <td>{{auxCliente.apellido}}</td>
+          <td>{{auxCliente.email}}</td>
+          <td>{{auxCliente.createAt}}</td>
+          <td>
+            <button type="button" name="button" [routerLink] = "['/clientes/form',auxCliente.id]" class="btn btn-primary">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  </div>
+</div>

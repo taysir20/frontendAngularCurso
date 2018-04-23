@@ -1,0 +1,39 @@
+<!--
+  Creamos un botón para ocultar o mostrar la lista de cursos.
+  Mdiante el atributo click y una condicional con el auxiliar '?'
+  podemos rpeguntar que si una vairable es true entonces se ponga a false
+  y viceversa.
+  (click)="habilitar = (habilitar==true)? false: true; significa que
+  si la variable es true que se ponga  afalso y si es al revés (con los ":")
+  entonces que se ponga a true.
+  También hacemos los mismo para el string del botón de mostrar/ocultar
+-->
+<button type="button" (click)="setHabilitar()"
+class="btn btn-primary my-3" >{{habilitar==true? 'Ocultar': 'Mostrar'}}</button>
+<div class="card">
+  <div class="card-header">
+    Listado de Cursos
+  </div>
+  <!--
+    Usaremos la directiva *ngIf para preguntar si la variable 'habilitar'
+    de la clase DirectivaComponent es verdadera o falsa para mostrar
+    la lista de cursos.
+    *ngIf="habilitar=true"> o como en un if que se evalua si es true: *ngIf="habilitar">
+  -->
+  <ul class="list-group" *ngIf="habilitar==true">
+    <!--
+      La idea es iterar el array listaCurso declarado en
+      la clase DirectivaComponent.
+      Cada li será un item, es decir un curso.
+      Usaremos la directiva 'ngFor' que permite recorrer arrays.
+          <li class="list-group-item" *ngFor='let curso of listaCurso'></li>
+          se especifica una variable estática con let que es lo mismo que la
+          variable auxiliar que usamos en los foreach y decimos con el of
+          sobre que lemento queremos iterar es decir sobre nuestro array listaCurso.
+      Por cada iteración, la cte auxCurso se instancia con una posición del array listaCurso
+      es decir con un curso y usando las llaves de interpolación de strings Podemos
+      imprimirlo.
+    -->
+    <li class="list-group-item" *ngFor="let auxCurso of listaCurso">{{auxCurso}}</li>
+  </ul>
+</div>
