@@ -120,5 +120,25 @@ export class FormComponent implements OnInit {
     )
 
   }
+  /*
+  Se envía el cliente mapeado al formulario al service, subscribiendo
+  cualquier cambio de este para que se actualice
+  */
+  public update():void{
+    this.clienteService.update(this.cliente).subscribe(
+      //Nos retorna el cliente como response en la función anónima
+      cliente=> {
+        this.router.navigate(['/clientes']);
+        /*
+        Este cliente.nombre es el cliente que recibimos por parámetro
+        ya actualizado
+        */
+
+        swal("Cliente actualizado", `Cliente ${cliente.nombre} actualizado satisfactoriamente.`,
+         'success');
+    }
+
+    )
+  }
 
 }

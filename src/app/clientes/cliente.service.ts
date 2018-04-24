@@ -101,7 +101,7 @@ de la clase
   }
 
 /*
-  Método que realzia la petición a la api apra que nos devuelva el cliente con la
+  Método que realiza la petición a la api para que nos devuelva el cliente con la
   id que recibimos como parámetro
 */
     public getCliente(id:number):Observable<Cliente>{
@@ -113,5 +113,26 @@ de la clase
         y variables de la clase.
       */
       return this.httpClient.get<Cliente>(`${this.urlEndPoint}/${id}`);
+    }
+/*
+  Método update que envía la petición put a la API de Spring y nos retorna
+  el cliente actualizado
+*/
+    public update(cliente:Cliente):Observable<Cliente>{
+      return this.httpClient.put<Cliente>(`${this.urlEndPoint}/${cliente.id}`, cliente,{headers: this.httpHeaders});
+    }
+
+    /*
+    Método queenvía un delete por petición a la api de Spring
+    para borrar un cliente. No retorna nada.
+    */
+
+    public delete(id:number):Observable<Cliente>{
+      /*
+      Recordamos que todo lo que se pasa con interpolación de string ``
+      tiene que ir con $ ya sea parámetro del método o variable global
+      de la clase
+      */
+      return this.httpClient.delete<Cliente>(`${this.urlEndPoint}/${id}`,{headers: this.httpHeaders});
     }
 }

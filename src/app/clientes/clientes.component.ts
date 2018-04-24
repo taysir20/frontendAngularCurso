@@ -4,6 +4,8 @@ import {Cliente} from './cliente';
 
 //Importamos el la clase cliente service para poder inyectarlo
 import {ClienteService} from './cliente.service'
+//Importamos el sweet2alert
+import swal from 'sweetalert2'
 
 
 @Component({
@@ -52,6 +54,58 @@ export class ClientesComponent implements OnInit{
 
 
 );
+  }
+  //Elinado del cliente
+  public delete(cliente:Cliente):void{
+    /*
+    Si recordamos, en el formController como Tenemos
+    mapeado el objeto cliente entonces podemos coger directamente
+    la id del cliente, pero en el clienteComponent no tenemos al cliente
+    mapeado y tendrá que recibir por parámetro al cliente
+    para poder sacar su id.
+    */
+    swal({
+  title: '¿Estás seguro de que deseas elimnar a este Cliente?',
+  text: `Si eliminas al cliente ${cliente.nombre} no podrás recuperarlo.`,
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: '¡Si, eliminar!',
+  cancelButtonText: '¡No, cancelar!',
+  confirmButtonClass: 'btn btn-success',
+  cancelButtonClass: 'btn btn-danger',
+  buttonsStyling: false,
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+    /*
+    Si presionan sobre el botón de confirmar entonces
+    se borra el cliente
+    */
+    this.clienteService.delete(cliente.id).subscribe(
+      response => {
+        /*
+        Vamos a quitar al cliente que acabamos de eliminar de la lista
+        mediante fitler()
+        Preguntamos pásandole por argumento cada cliente. Se va a recorrer
+        cada cliente y prguntando que si ese cliente es igual al cliente
+        que hemos eliminado entonces que se quite de la lista
+        */
+        //Seteamos a la lista de clientes la lsita sin el cliente borrado
+        this.clientes = this.clientes.filter(cli=> cli !==cliente);
+        swal('¡Cliente eliminado!', '¡Cliente eliminado con éxito!', 'success')
+      }
+
+
+    )
+    swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
   }
 
 
